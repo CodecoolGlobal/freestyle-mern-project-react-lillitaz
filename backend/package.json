@@ -11,6 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/CodecoolGlobal/freestyle-mern-project-react-lillitaz.git"
   },
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
