@@ -15,3 +15,17 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+
+app.post('/api/data',(req,res)=>{
+    const email = req.body.email
+    const userName = req.body.userName
+    const password = req.body.password
+    const user =  new User({
+        email,
+        userName,
+        password
+    });
+    user.save()
+    .then(user => res.json(user))
+    .catch(err => res.status(400).json({success: false})) 
+})
