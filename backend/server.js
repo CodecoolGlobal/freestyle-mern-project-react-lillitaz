@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import express  from "express";
+import User from "./model/user";
+
 const app = express();
 const port = 5000;
 app.use(express.json());
