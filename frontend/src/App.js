@@ -1,12 +1,21 @@
+import ReactDOM from "react-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
-import CreateAccount from './components/CreateAccount';
+
+import Layout from './pages/Layout';
+import Home from './pages/Home';
+import Account from './pages/Account';
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-     <CreateAccount></CreateAccount>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="account" element={< Account />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
