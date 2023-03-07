@@ -1,9 +1,10 @@
 body {
-    font-family: 'Quicksand', sans-serif;
-    background-color: #E8ECF4;
-    color: #212121;
+  font-family: "Quicksand", sans-serif;
+  background-image: url(./img/background1.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #212121;
 }
-
 
 /*font:
 from https://fonts.google.com/specimen/Quicksand
