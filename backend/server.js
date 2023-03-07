@@ -6,7 +6,10 @@ const app = express();
 const port = 5000;
 app.use(express.json());
 app.listen(port, ()=> console.log(`Server started on port ${port}`))
-mongoose.connect("mongodb+srv://flippo:3GToHXDHQT4quNzu@cluster0.fo89bda.mongodb.net/CrudeMovieDb")
+mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
 
 
 app.use(function(req, res, next) {
