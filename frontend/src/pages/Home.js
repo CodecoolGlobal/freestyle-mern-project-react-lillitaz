@@ -21,7 +21,7 @@ function Home() {
       <div id="content-wrap">
         <div className="headline">
           <container>
-            <h1>Welcome</h1>
+            <h1>Welcome to CrudeMovieDb</h1>
             <h2>
               Watch at home or while you travel <br />
               on tablet, phone or TV
