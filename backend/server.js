@@ -1,11 +1,16 @@
 import mongoose from "mongoose";
 import express  from "express";
-import User from "./model/user";
+import User from "./model/User.js";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
 const port = 5000;
+
 app.use(express.json());
+
 app.listen(port, ()=> console.log(`Server started on port ${port}`))
+
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -19,7 +24,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.post('/api/data',(req,res)=>{
+app.post('/api/create',(req,res)=>{
     const email = req.body.email
     const userName = req.body.userName
     const password = req.body.password
