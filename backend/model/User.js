@@ -10,4 +10,4 @@ const userData = new Schema({
 
 const User =  model ('User', userData)
 
-export default User;import User from "./model/User.js";
+export default User

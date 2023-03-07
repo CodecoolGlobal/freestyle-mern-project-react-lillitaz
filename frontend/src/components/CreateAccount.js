@@ -50,7 +50,7 @@ function handleSubmit(event){
                 
                 ></input>
             <div>
-            <input type ="checkbox" /><p>I accept the <a href="javascript:void(0)">AGB</a>    </p>
+            <input type ="checkbox" /><p>I accept the <Link to="/AGB">AGB</Link>    </p>
           </div>
           < Button type="submit" innerText={"Create Account"} />
           </form>
