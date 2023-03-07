@@ -37,3 +37,24 @@ app.post('/api/create',(req,res)=>{
     .then(user => res.json(user))
     .catch(err => res.status(400).json({success: false})) 
 })
+
+app.post('/api/login', (req, res) => {
+    const { userName, password } = req.body;
+  
+    
+    User.findOne({ userName, password })
+      .then(user => {
+        if (user) {
+         
+          res.json({ success: true });
+        } else {
+       
+          res.status(401).json({ success: false, message: 'Invalid username or password' });
+        }
+      })
+      .catch(err => {
+        
+        console.error(err);
+        res.status(500).json({ success: false, message: 'Internal server error' });
+      });
+  });

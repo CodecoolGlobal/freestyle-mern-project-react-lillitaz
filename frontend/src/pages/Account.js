@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Footer from "../components/Footer";
 import MovieSearch from "../components/MovieSearch";
 import Button from "../components/Button";
+import Login from '../components/Login';
 
 function Account() {
   const [movieData, setMovieData] = useState({});
@@ -39,6 +40,9 @@ function Account() {
           )}
           <Button type="submit" innerText={"Add to Collection"}></Button>
         </div>
+                <div>
+                    <Login />
+                </div>
       </div>
       <div>
         <Footer currentDate={currentDate} />
