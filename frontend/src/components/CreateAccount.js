@@ -1,6 +1,6 @@
 import React,{useState} from "react";
+import {Link} from "react-router-dom";
 import Button from "./Button";
-
 export default function CreateAccount(){
 const [email, setEmail] = useState('')
 const [userName, setUserName] = useState('')
@@ -9,9 +9,9 @@ const [password, setPassword] = useState('')
 function handleSubmit(event){
     event.preventDefault();
     
-    fetch('http://localhost:5000/api/data',{
+    fetch('http://localhost:5000/api/create',{
         method: 'POST',
-        headers:{'Content-Type': 'apllication/json'},
+        headers:{'Content-Type': 'application/json'},
         body: JSON.stringify({email,userName,password})
     })
     .then((response)=> response.json())
@@ -45,18 +45,15 @@ function handleSubmit(event){
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
                 ></input>
-                <h3>Repeat Password:</h3>
-                <input
-                    type="text"
-                    id="password"
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
+            <h3>Repeat Password:</h3>
+            <input 
+                
                 ></input>
-                <div>
-                    <input type="checkbox" /><p>I accept the <a href="javascript:void(0)">AGB</a>.</p>
-                </div>
-                < Button type="submit" innerText={"Create Account"} />
-            </form>
+            <div>
+            <input type ="checkbox" /><p>I accept the <a href="javascript:void(0)">AGB</a>    </p>
+          </div>
+          < Button type="submit" innerText={"Create Account"} />
+          </form>
         </div>
     )
 }

@@ -8,5 +8,6 @@ const userData = new Schema({
     password: String
 })
 
-const User = model ('User', userData)
-export default User 
+const User =  model ('User', userData)
+
+export default User;import User from "./model/User.js";
