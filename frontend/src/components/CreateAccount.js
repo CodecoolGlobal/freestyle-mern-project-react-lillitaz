@@ -22,7 +22,7 @@ function handleSubmit(event){
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form id="create-account-form" onSubmit={handleSubmit}>
                 <h2> Create a new Account</h2>
                 <h3>Email:</h3>
                 <input

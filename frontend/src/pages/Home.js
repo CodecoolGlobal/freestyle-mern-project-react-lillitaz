@@ -21,7 +21,7 @@ function Home() {
                 <div>
                     this is the homepage, there will be a header and a log in/ create account field
                 </div>
-                <div>
+                <div id="movie-showcase">
                     <MovieSearch handleSelect={handleMovieSelect} />
                     {movieData && (
                         <div>

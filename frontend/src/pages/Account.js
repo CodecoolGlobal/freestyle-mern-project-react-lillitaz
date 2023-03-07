@@ -17,8 +17,10 @@ function Account() {
     return (
         <div id="page-container">
             <div id="content-wrap">
-                <div>this is the user account page, the user can edit their user data here, maybe add alternative contact information and also search input field with add to favorite movies button</div>
                 <div>
+                    this is the user account page, the user can edit their user data here, maybe add alternative contact information and also search input field with add to favorite movies button
+                </div>
+                <div id="movie-showcase">
                     <MovieSearch handleSelect={handleMovieSelect} />
                     {movieData && (
                         <div>
