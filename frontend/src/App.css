@@ -134,6 +134,12 @@ form {
   border-radius: 2vh;
 }
 
+#movie-showcase input {
+  border: none;
+  border-radius: 15px;
+  outline: none;
+}
+
 footer {
   background-color: #e7ce8c;
   height: 8vh;
