@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Footer from "../components/Footer";
 import MovieSearch from "../components/MovieSearch";
 import Button from "../components/Button";
-import Login from '../components/Login';
+import Login from "../components/Login";
 
 function Account() {
   const [movieData, setMovieData] = useState({});
@@ -20,11 +20,7 @@ function Account() {
   return (
     <div id="page-container">
       <div id="content-wrap">
-        <div>
-          this is the user account page, the user can edit their user data here,
-          maybe add alternative contact information and also search input field
-          with add to favorite movies button
-        </div>
+        <div></div>
         <div id="movie-showcase">
           <MovieSearch handleSelect={handleMovieSelect} />
           {movieData && (
@@ -40,9 +36,9 @@ function Account() {
           )}
           <Button type="submit" innerText={"Add to Collection"}></Button>
         </div>
-                <div>
-                    <Login />
-                </div>
+        <div>
+          <Login />
+        </div>
       </div>
       <div>
         <Footer currentDate={currentDate} />

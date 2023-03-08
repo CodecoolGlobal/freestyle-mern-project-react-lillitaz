@@ -117,6 +117,7 @@ form {
   border: none;
   border-radius: 15px;
   outline: none;
+  width: 60%;
 }
 
 #movie-showcase {
@@ -138,6 +139,7 @@ form {
   border: none;
   border-radius: 15px;
   outline: none;
+  width: 100%;
 }
 
 footer {
