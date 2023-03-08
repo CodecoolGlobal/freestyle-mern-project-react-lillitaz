@@ -5,6 +5,7 @@ export default function CreateAccount() {
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState('');
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -15,13 +16,23 @@ export default function CreateAccount() {
 
       return;
     }
-    const passwordRegex =
-      /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-    if (!passwordRegex.test(password)) {
-      alert(
-        "Password must be at least 8 characters long, have at least one uppercase letter, one  number and one special character. "
-      );
+    if(userName.length <= 3){
+        alert('Please enter a username with at lest 3 characters')
+        return;
     }
+    const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    if (!passwordRegex.test(password)) {
+      alert("Password must be at least 8 characters long, have at least one uppercase letter, one  number and one special character. ");
+      return;
+    }
+
+    if(password !== repeatPassword){
+        alert('Passwords do not match');
+        return;
+    }
+
+
+
     fetch("http://localhost:5000/api/create", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -58,7 +69,13 @@ export default function CreateAccount() {
           onChange={(event) => setPassword(event.target.value)}
         ></input>
         <h3>Repeat Password:</h3>
-        <input></input>
+        <input
+          type="text"
+          id="repeatPassword"
+          value={repeatPassword}
+          onChange={(event) => setRepeatPassword(event.target.value)}
+          >
+          </input>
         <div>
           <input type="checkbox" />
           <p>
