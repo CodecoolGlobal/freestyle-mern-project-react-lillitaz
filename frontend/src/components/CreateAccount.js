@@ -6,6 +6,7 @@ export default function CreateAccount() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -42,6 +43,9 @@ export default function CreateAccount() {
       .then((data) => console.log(data))
       .catch((error) => console.error(error));
   }
+  function handlePasswordShow(){
+    setShowPassword(!showPassword)
+  }
 
   return (
     <div>
@@ -63,19 +67,21 @@ export default function CreateAccount() {
         ></input>
         <h3>Password:</h3>
         <input
-          type="text"
+          type={showPassword ? "text" : "password"}
           id="password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
         ></input>
+        <button type="button" onClick={handlePasswordShow}>{showPassword ? "Hide" :"Show"}</button>
         <h3>Repeat Password:</h3>
         <input
-          type="text"
+          type={showPassword ? "text" : "password"}
           id="repeatPassword"
           value={repeatPassword}
           onChange={(event) => setRepeatPassword(event.target.value)}
           >
           </input>
+          <button type="button" onClick={handlePasswordShow}>{showPassword ? "Hide" :"Show"}</button>
         <div>
           <input type="checkbox" />
           <p>
