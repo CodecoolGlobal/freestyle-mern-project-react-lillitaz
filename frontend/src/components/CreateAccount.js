@@ -8,7 +8,16 @@ const [password, setPassword] = useState('')
 
 function handleSubmit(event){
     event.preventDefault();
-    
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if(!emailRegex.test(email)){
+            alert('Please enter a valid email address')
+        return
+    }
+    const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+        if(!passwordRegex.test(password)){
+                alert('Password must be at least 8 characters long, have at least one uppercase letter, one  number and one special character. ')
+        }
     fetch('http://localhost:5000/api/create',{
         method: 'POST',
         headers:{'Content-Type': 'application/json'},
