@@ -8,14 +8,13 @@ function Account() {
   const [movieData, setMovieData] = useState({});
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
-  let currentDate = new Date().toDateString();
+  const currentDate = new Date().toDateString();
 
   const handleMovieSelect = async (movie) => {
     const response = await fetch(
       `http://www.omdbapi.com/?apikey=38ae7047&i=${movie.imdbID}`
     );
     const data = await response.json();
-    console.log(data);
     setMovieData(data);
   };
 
@@ -37,23 +36,30 @@ function Account() {
     }
   };
 
-  const handleAddToCollection = async () => {
+  const handleAddToFavorites = async () => {
     const { Title: title, Year: year, Poster: poster } = movieData;
 
     if (!user || !movieData) {
       console.log("No user or movie data found");
       return;
     }
+
     try {
       const response = await fetch(`http://localhost:5000/api/favorites`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title, year, poster, currentUser: user }),
       });
-      } catch (error) {
+
+      if (response.ok) {
+        console.log("Movie added to favorites");
+      } else {
+        console.error("Could not add movie to favorites");
+      }
+    } catch (error) {
       console.error(error);
     }
-  }  
+  };
 
   return (
     <div id="page-container">
@@ -75,7 +81,11 @@ function Account() {
               <img src={movieData.Poster} alt={movieData.Title} />
             </div>
           )}
-          <Button type="button" onClick={() => handleAddToCollection()} innerText={"Add to Collection"} />
+          <Button
+            type="button"
+            onClick={() => handleAddToFavorites()}
+            innerText={"Add to Collection"}
+          />
         </div>
       </div>
       <div>
@@ -83,6 +93,6 @@ function Account() {
       </div>
     </div>
   );
-};
+}
 
 export default Account;

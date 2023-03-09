@@ -8,6 +8,7 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
+
 app.use(cors());
 app.use(express.json());
 
@@ -19,10 +20,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 });
 
 app.post("/api/create", (req, res) => {
-  const email = req.body.email;
-  const userName = req.body.userName;
-  const password = req.body.password;
-
+  const { email, userName, password } = req.body;
   const user = new User({
     email,
     userName,
@@ -59,30 +57,24 @@ app.post("/api/login", (req, res) => {
     });
 });
 
-app.post("/api/favorites", requireLogin, (req, res) => {
-  const userName = req.body.currentUser;
-  console.log(req.body);
-  console.log(userName);
+app.post('/api/favorites', requireLogin, async (req, res) => {
+  try {
+    const { currentUser } = req.body;
+    const { title, year, poster, imdbId } = req.body;
 
-  User.findOne({ userName })
-    .then((user) => {
-      if (!user) {
-        res.status(401).json({ success: false, message: "User not found" });
-      } else {
-        user.favorites.push({
-          title: req.body.title,
-          year: req.body.year,
-          poster: req.body.poster,
-          imdbId: req.body.imdbId,
-        });
-        user.save();
-        res.status(200).json({ success: true, favorites: user.favorites });
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(500).json({ success: false, message: "Could not save" });
-    });
+    const user = await User.findOne({ userName: currentUser });
+
+    if (!user) {
+      res.status(401).json({ success: false, message: 'User not found' });
+    } else {
+      user.favorites.push({ title, year, poster, imdbId });
+      await user.save();
+      res.status(200).json({ success: true, favorites: user.favorites });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Could not save' });
+  }
 });
 
 function requireLogin(req, res, next) {
