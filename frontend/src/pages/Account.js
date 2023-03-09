@@ -6,6 +6,8 @@ import Login from "../components/Login";
 
 function Account() {
   const [movieData, setMovieData] = useState({});
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
   let currentDate = new Date().toDateString();
 
   const handleMovieSelect = async (movie) => {
@@ -17,10 +19,49 @@ function Account() {
     setMovieData(data);
   };
 
+  const handleLogin = async (username, password) => {
+    try {
+      const response = await fetch("http://localhost:5000/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userName: username, password: password }),
+      });
+      if (response.ok) {
+        setUser(username);
+      } else {
+        setError("Invalid username or password");
+      }
+    } catch (error) {
+      console.error(error);
+      setError("Something went wrong");
+    }
+  };
+
+  const handleAddToCollection = async () => {
+    const { Title: title, Year: year, Poster: poster } = movieData;
+
+    if (!user || !movieData) {
+      console.log("No user or movie data found");
+      return;
+    }
+    try {
+      const response = await fetch(`http://localhost:5000/api/favorites`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, year, poster, currentUser: user }),
+      });
+      } catch (error) {
+      console.error(error);
+    }
+  }  
+
   return (
     <div id="page-container">
       <div id="content-wrap">
         <div></div>
+        <div>
+          <Login onLogin={handleLogin} error={error} />
+        </div>
         <div id="movie-showcase">
           <MovieSearch handleSelect={handleMovieSelect} />
           {movieData && (
@@ -34,10 +75,7 @@ function Account() {
               <img src={movieData.Poster} alt={movieData.Title} />
             </div>
           )}
-          <Button type="submit" innerText={"Add to Collection"}></Button>
-        </div>
-        <div>
-          <Login />
+          <Button type="button" onClick={() => handleAddToCollection()} innerText={"Add to Collection"} />
         </div>
       </div>
       <div>
@@ -45,6 +83,6 @@ function Account() {
       </div>
     </div>
   );
-}
+};
 
 export default Account;

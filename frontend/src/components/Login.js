@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 
-export default function Login() {
+export default function Login({ onLogin, error }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
-  const [showPassword, setShowPassword] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -16,19 +14,17 @@ export default function Login() {
       .then((response) => {
         if (response.ok) {
           console.log("Worked");
+          onLogin(username, password);
         } else {
-          setError("invalid username or password");
-          console.log("not found");
-          console.log(response);
+          console.log("Error");
         }
       })
       .catch((error) => console.error(error));
   }
-  function handleShowPassword() {
-    setShowPassword(!showPassword);
-  }
+
   return (
-    <div id="login" className="">
+    <div>
+      {error && <div>{error}</div>}
       <form onSubmit={handleSubmit}>
         <h3>Username:</h3>
         <input
@@ -40,13 +36,11 @@ export default function Login() {
         <h3>Password:</h3>
         <input
           className="logInInput"
-          type={showPassword ? "text" : "password"}
+          type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         ></input>
-        <button type="button" onClick={handleShowPassword}>
-          {showPassword ? "Hide" : "Show"}
-        </button>
+      
         <button type="submit">Submit</button>
       </form>
     </div>

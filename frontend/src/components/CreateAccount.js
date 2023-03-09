@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "./Button";
+
 export default function CreateAccount() {
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
@@ -14,7 +15,6 @@ export default function CreateAccount() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       alert("Please enter a valid email address");
-
       return;
     }
     if (userName.length <= 3) {
@@ -34,6 +34,7 @@ export default function CreateAccount() {
       alert("Passwords do not match");
       return;
     }
+
 
     fetch("http://localhost:5000/api/create", {
       method: "POST",

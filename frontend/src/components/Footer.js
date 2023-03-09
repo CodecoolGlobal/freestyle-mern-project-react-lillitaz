@@ -6,7 +6,7 @@ export default function footer(props) {
     <div>
       <footer id ="footer"
             className='footer'
-      >{ currentDate } <a id="impressum"> | ©CrudeMovieDb</a></footer>
+      >{ currentDate } <p id="impressum"> | ©CrudeMovieDb</p></footer>
     </div>
   )
 }
