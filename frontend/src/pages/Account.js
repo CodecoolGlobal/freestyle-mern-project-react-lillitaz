@@ -50,10 +50,10 @@ function Account() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title, year, poster, currentUser: user }),
       });
-      } catch (error) {
+    } catch (error) {
       console.error(error);
     }
-  }  
+  };
 
   return (
     <div id="page-container">
@@ -75,14 +75,16 @@ function Account() {
               <img src={movieData.Poster} alt={movieData.Title} />
             </div>
           )}
-          <Button type="button" onClick={() => handleAddToCollection()} innerText={"Add to Collection"} />
+          <Button
+            type="button"
+            onClick={() => handleAddToCollection()}
+            innerText={"Add to Collection"}
+          />
         </div>
-      </div>
-      <div>
         <Footer currentDate={currentDate} />
       </div>
     </div>
   );
-};
+}
 
 export default Account;

@@ -4,6 +4,7 @@ import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import Account from "./pages/Account";
 import AGB from "./pages/AGB";
+import FavoriteMovies from "./pages/FavoriteMovies";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="account" element={<Account />} />
           <Route path="AGB" element={<AGB></AGB>} />
+          <Route path="favorite" element={<FavoriteMovies />} />
         </Route>
       </Routes>
     </BrowserRouter>

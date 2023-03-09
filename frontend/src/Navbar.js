@@ -11,9 +11,12 @@ function Navbar() {
         <li>
           <Link to="/account">User Account</Link>
         </li>
+        <li>
+          <Link to="/favorite">Favorite Movies</Link>
+        </li>
       </ul>
     </nav>
   );
 }
-  
+
 export default Navbar;
