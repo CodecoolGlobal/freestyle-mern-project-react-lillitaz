@@ -87,8 +87,6 @@ function Account() {
             innerText={"Add to Collection"}
           />
         </div>
-      </div>
-      <div>
         <Footer currentDate={currentDate} />
       </div>
     </div>

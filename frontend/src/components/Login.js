@@ -40,7 +40,7 @@ export default function Login({ onLogin, error }) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         ></input>
-      
+
         <button type="submit">Submit</button>
       </form>
     </div>
