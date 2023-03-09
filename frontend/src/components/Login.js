@@ -26,16 +26,16 @@ export default function Login({ onLogin, error }) {
     <div>
       {error && <div>{error}</div>}
       <form onSubmit={handleSubmit}>
-        <h3>Username:</h3>
         <input
           className="logInInput"
           type="text"
+          placeholder="User Name"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         ></input>
-        <h3>Password:</h3>
         <input
           className="logInInput"
+          placeholder="Password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}

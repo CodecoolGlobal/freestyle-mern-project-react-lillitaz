@@ -1,6 +1,6 @@
 Freestyle MERN project (sprint1)
-
-In progress
 Team : CrudeMovieDb
 
-We will build a MERN project based on the knowledge we have acquired so far, with the help of an external API. It must cover CRUD operations.
+This is a Freestyle MERN project based on the knowledge we have acquired (MongoDb, Express, React, Node) so far, with the help of an external API. We picked OMDB, an open movie database. The only task is to cover CRUD operations (Create, Read, Update, Delete).
+
+In progress

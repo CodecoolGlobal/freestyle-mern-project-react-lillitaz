@@ -3,8 +3,14 @@
   min-height: 100vh;
 }
 
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
 #content-wrap {
-  padding-bottom: 2.5rem;
+  padding-bottom: 4rem;
 }
 
 nav {
@@ -32,31 +38,20 @@ nav a {
   color: #e7ce8c;
   text-decoration: none;
   font-size: 1.2vw;
-  padding-right: 1vw;
-}
-
-@media (max-width: 768px) {
-  nav {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  nav ul {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  nav a {
-    font-size: 4vw;
-    padding-right: 0.5vw;
-  }
-  nav li {
-    margin: 1vh 0;
-  }
+  padding-right: 0.5rem 1vw;
 }
 
 .autocomplete {
   position: relative;
   display: inline-block;
+}
+
+.autocomplete input[type="text"] {
+  width: 100%;
+  padding: 0.5rem;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
 }
 
 .autocomplete-items {
@@ -68,7 +63,8 @@ nav a {
   max-height: 200px;
   overflow-y: scroll;
   background-color: white;
-  border: 1px solid #ccc;
+  border: none;
+  border-radius: 1px;
   border-top: none;
   list-style-type: none;
   padding: 0;
@@ -78,6 +74,7 @@ nav a {
 .autocomplete-items li {
   padding: 5px 10px;
   cursor: pointer;
+  color: #000000;
 }
 
 .autocomplete-items li:hover {
@@ -93,31 +90,41 @@ form {
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
-  margin-left: 20%;
+  margin-top:2%;
   border-radius: 2vh;
-  max-width: 50%;
+  max-width: 100%;
+}
+
+input {
+  padding: 0.9rem;
+  border-radius: 10px;
+  border-style: none;
+  margin:0.4%;
+  font-size: larger;
 }
 
 #create-account-form {
-  background-image: url(./img/popcorn.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(9px);
   position: relative;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  align-items: center;
-  margin-bottom: 5%;
-  margin-left: 60%;
+  align-items: left;
+  padding: 5rem;
+  margin-left: 55%;
+  margin-bottom:5%;
   border-radius: 2vh;
-  max-width: 20%;
+  max-width: 30%;
+  margin-top: -15%;
 }
 
 #create-account-form input {
   border: none;
-  border-radius: 15px;
+  border-radius: 10px;
   outline: none;
-  width: 60%;
+  padding:2%;
+  width: 100%;
 }
 
 #movie-showcase {
@@ -125,25 +132,25 @@ form {
   background-size: cover;
   background-repeat: no-repeat;
   display: flex;
-  margin-right: 10%;
-  padding: 2vh;
+  margin-bottom: 5%;
+  padding: 10vh;
   color: #ccc;
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
-  margin-left: 10%;
   border-radius: 2vh;
 }
 
 #movie-showcase input {
-  border: none;
-  border-radius: 15px;
-  outline: none;
-  width: 100%;
+  padding: 0.9rem;
+  border-radius: 10px;
+  border-style: none;
+  margin:0.4%;
+  font-size: larger;
 }
 
 footer {
-  background-color: #e7ce8c;
+  background-color: #faf4e2;
   height: 8vh;
   width: 100%;
   display: flex;
@@ -157,14 +164,16 @@ footer {
 }
 
 button {
-  padding: 0.5%;
-  background: #23254c;
+  padding: 0.6%;
+  margin: 2%;
+  margin-top:5%;
+  background: #d0d2f7;
   border: none;
   border-radius: 2vh;
-  color: #f7f2f2;
+  color: #131111;
   font-weight: bold;
-  font-size: medium;
-  transition: all 0.6s ease-in-out;
+  font-size: xx-large;
+  transition: all 0.8s ease-in-out;
   display: flex;
 }
 
@@ -179,23 +188,49 @@ button:hover {
   flex-wrap: wrap;
   color: #000000;
   position: relative;
-  margin-left: 10%;
+  margin: 5%;
   width: fit-content;
   background-color: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(1px);
-  padding: 20px;
+  backdrop-filter: blur(9px);
+  padding: 2vw;
   border-radius: 10px;
-  width: 40%;
-  text-align: center;
+  width: 30%;
+  text-align: left;
 }
 .hide {
   display: none;
 }
 .agb {
   background-color: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(1px);
+  backdrop-filter: blur(9px);
   padding: 20px;
   border-radius: 10px;
   width: 80%;
-  text-align: center;
+  margin:5%;
+  text-align: left;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav li {
+    margin: 1vh 0;
+  }
+
+  nav a {
+    font-size: 4vw;
+    padding-right: 0.5vw;
+  }
 }

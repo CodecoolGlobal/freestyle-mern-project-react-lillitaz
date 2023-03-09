@@ -5,7 +5,7 @@ function AGB() {
     <div className="agb">
       <h2>ACCEPTABLE USE POLICY</h2>
       <p>ACCEPTABLE USE POLICY</p>
-      <ol>
+      <ul>
         <li>
           Respect others: Do not harass, insult, threaten, or discriminate
           against other users. Do not post content that is offensive or
@@ -40,7 +40,7 @@ function AGB() {
           No liability: We are not responsible for any content posted by users
           or for any consequences that may result from using our forum.
         </li>
-      </ol>
+      </ul>
       <p>
         Thank you for reading and following our acceptable use policy. We
         reserve the right to modify these rules at any time.
