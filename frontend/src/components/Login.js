@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-const login = document.getElementById("login");
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -16,7 +15,6 @@ export default function Login() {
     })
       .then((response) => {
         if (response.ok) {
-          login.classList.add("hide");
           console.log("Worked");
         } else {
           setError("invalid username or password");
