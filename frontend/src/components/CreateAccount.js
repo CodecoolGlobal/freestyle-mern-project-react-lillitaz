@@ -5,6 +5,8 @@ export default function CreateAccount() {
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   function handleSubmit(event) {
     console.log("hello");
@@ -17,13 +19,23 @@ export default function CreateAccount() {
 
       return;
     }
-    const passwordRegex =
-      /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-    if (!passwordRegex.test(password)) {
-      alert(
-        "Password must be at least 8 characters long, have at least one uppercase letter, one  number and one special character. "
-      );
+    if(userName.length <= 3){
+        alert('Please enter a username with at lest 3 characters')
+        return;
     }
+    const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    if (!passwordRegex.test(password)) {
+      alert("Password must be at least 8 characters long, have at least one uppercase letter, one  number and one special character. ");
+      return;
+    }
+
+    if(password !== repeatPassword){
+        alert('Passwords do not match');
+        return;
+    }
+
+
+
     fetch("http://localhost:5000/api/create", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -32,6 +44,9 @@ export default function CreateAccount() {
       .then((response) => response.json())
       .then((data) => console.log(data))
       .catch((error) => console.error(error));
+  }
+  function handlePasswordShow(){
+    setShowPassword(!showPassword)
   }
 
   return (
@@ -58,13 +73,21 @@ export default function CreateAccount() {
         ></input>
         <h3>Password:</h3>
         <input
-          type="text"
+          type={showPassword ? "text" : "password"}
           id="password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
         ></input>
+        <button type="button" onClick={handlePasswordShow}>{showPassword ? "Hide" :"Show"}</button>
         <h3>Repeat Password:</h3>
-        <input></input>
+        <input
+          type={showPassword ? "text" : "password"}
+          id="repeatPassword"
+          value={repeatPassword}
+          onChange={(event) => setRepeatPassword(event.target.value)}
+          >
+          </input>
+          <button type="button" onClick={handlePasswordShow}>{showPassword ? "Hide" :"Show"}</button>
         <div>
           <input type="checkbox" />
           <p>
