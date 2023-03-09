@@ -19,6 +19,13 @@ mongoose.connect(process.env.MONGODB_URI, {
   useUnifiedTopology: true,
 });
 
+app.get('/api/users', (req,res)=>{
+    
+  User.find({})
+  .then((users)=> res.json(users))
+  .catch((error) => console.error(error))
+})
+
 app.post("/api/create", (req, res) => {
   const { email, userName, password } = req.body;
   const user = new User({
@@ -89,3 +96,19 @@ function requireLogin(req, res, next) {
     next();
   }
 }
+
+app.delete("/api/users/:userId/favorites/:favId", (req, res) => {
+  const userId = req.params.userId;
+  const favId = req.params.favId;
+  if (!favId) {
+    return res.status(400).send("Invalid favorite id");
+  }
+  User.findByIdAndUpdate(userId, {$pull: {favorites: {_id: favId}}})
+    .then(() => {
+      res.status(200).send("Favorite movie deleted successfully");
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send(error);
+    });
+});
