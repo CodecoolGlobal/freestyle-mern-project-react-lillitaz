@@ -20,14 +20,12 @@ function Home() {
     <div id="page-container">
       <div id="content-wrap">
         <div className="headline">
-          <container>
-            <h1>Welcome to CrudeMovieDb</h1>
-            <h2>
-              Watch at home or while you travel <br />
-              on tablet, phone or TV
-            </h2>
-            <p> Create an Account and watch your favorite Movies!</p>
-          </container>
+          <h1>Welcome to CrudeMovieDb</h1>
+          <h2>
+            Watch at home or while you travel <br />
+            on tablet, phone or TV
+          </h2>
+          <p> Create an Account and save your favorite Movies!</p>
         </div>
         <div>
           <CreateAccount />

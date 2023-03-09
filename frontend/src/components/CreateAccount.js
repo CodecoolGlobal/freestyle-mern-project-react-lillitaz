@@ -5,36 +5,35 @@ export default function CreateAccount() {
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState('');
+  const [repeatPassword, setRepeatPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   function handleSubmit(event) {
-    console.log("hello");
-
     event.preventDefault();
-
+    window.location.href = "http://localhost:3000/account";
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       alert("Please enter a valid email address");
 
       return;
     }
-    if(userName.length <= 3){
-        alert('Please enter a username with at lest 3 characters')
-        return;
+    if (userName.length <= 3) {
+      alert("Please enter a username with at lest 3 characters");
+      return;
     }
-    const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    const passwordRegex =
+      /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     if (!passwordRegex.test(password)) {
-      alert("Password must be at least 8 characters long, have at least one uppercase letter, one  number and one special character. ");
+      alert(
+        "Password must be at least 8 characters long, have at least one uppercase letter, one  number and one special character. "
+      );
       return;
     }
 
-    if(password !== repeatPassword){
-        alert('Passwords do not match');
-        return;
+    if (password !== repeatPassword) {
+      alert("Passwords do not match");
+      return;
     }
-
-
 
     fetch("http://localhost:5000/api/create", {
       method: "POST",
@@ -45,8 +44,8 @@ export default function CreateAccount() {
       .then((data) => console.log(data))
       .catch((error) => console.error(error));
   }
-  function handlePasswordShow(){
-    setShowPassword(!showPassword)
+  function handlePasswordShow() {
+    setShowPassword(!showPassword);
   }
 
   return (
@@ -78,16 +77,19 @@ export default function CreateAccount() {
           value={password}
           onChange={(event) => setPassword(event.target.value)}
         ></input>
-        <button type="button" onClick={handlePasswordShow}>{showPassword ? "Hide" :"Show"}</button>
+        <button type="button" onClick={handlePasswordShow}>
+          {showPassword ? "Hide" : "Show"}
+        </button>
         <h3>Repeat Password:</h3>
         <input
           type={showPassword ? "text" : "password"}
           id="repeatPassword"
           value={repeatPassword}
           onChange={(event) => setRepeatPassword(event.target.value)}
-          >
-          </input>
-          <button type="button" onClick={handlePasswordShow}>{showPassword ? "Hide" :"Show"}</button>
+        ></input>
+        <button type="button" onClick={handlePasswordShow}>
+          {showPassword ? "Hide" : "Show"}
+        </button>
         <div>
           <input type="checkbox" />
           <p>

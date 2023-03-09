@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+const login = document.getElementById("login");
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const [showPassword,setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -15,6 +16,7 @@ export default function Login() {
     })
       .then((response) => {
         if (response.ok) {
+          login.classList.add("hide");
           console.log("Worked");
         } else {
           setError("invalid username or password");
@@ -24,11 +26,11 @@ export default function Login() {
       })
       .catch((error) => console.error(error));
   }
-  function handleShowPassword(){
-    setShowPassword(!showPassword)
+  function handleShowPassword() {
+    setShowPassword(!showPassword);
   }
   return (
-    <div>
+    <div id="login" className="">
       <form onSubmit={handleSubmit}>
         <h3>Username:</h3>
         <input
@@ -44,7 +46,9 @@ export default function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         ></input>
-        <button type="button" onClick={handleShowPassword}>{showPassword ? "Hide" :"Show"}</button>
+        <button type="button" onClick={handleShowPassword}>
+          {showPassword ? "Hide" : "Show"}
+        </button>
         <button type="submit">Submit</button>
       </form>
     </div>
