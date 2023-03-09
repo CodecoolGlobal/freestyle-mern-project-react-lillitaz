@@ -7,6 +7,8 @@ export default function CreateAccount() {
   const [password, setPassword] = useState("");
 
   function handleSubmit(event) {
+    console.log("hello");
+
     event.preventDefault();
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -34,7 +36,11 @@ export default function CreateAccount() {
 
   return (
     <div>
-      <form id="create-account-form" onSubmit={handleSubmit}>
+      <form
+        id="create-account-form"
+        onSubmit={handleSubmit}
+        action={"http://127.0.0.1:3000/account"}
+      >
         <h2> Create a new Account</h2>
         <h3>Email:</h3>
         <input
