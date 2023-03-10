@@ -6,7 +6,7 @@ import Login from "../components/Login";
 
 function Account() {
   const [movieData, setMovieData] = useState({});
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(localStorage.getItem("user") || null);
   const [error, setError] = useState(null);
   const currentDate = new Date().toDateString();
 
@@ -27,6 +27,7 @@ function Account() {
       });
       if (response.ok) {
         setUser(username);
+        localStorage.setItem("user", username);
       } else {
         setError("Invalid username or password");
       }
@@ -34,6 +35,11 @@ function Account() {
       console.error(error);
       setError("Something went wrong");
     }
+  };
+
+  const handleLogout = () => {
+    setUser(null);
+    localStorage.removeItem("user");
   };
 
   const handleAddToFavorites = async () => {
@@ -64,29 +70,37 @@ function Account() {
   return (
     <div id="page-container">
       <div id="content-wrap">
-        <div></div>
-        <div>
-          <Login onLogin={handleLogin} error={error} />
-        </div>
-        <div id="movie-showcase">
-          <MovieSearch handleSelect={handleMovieSelect} />
-          {movieData && (
-            <div>
-              <h2>{movieData.Title}</h2>
-              <p>{movieData.Genre}</p>
-              <p>{movieData.Year}</p>
-              <p>{movieData.imdbRating}</p>
-              <p>{movieData.Actors}</p>
-              <p>{movieData.Plot}</p>
-              <img src={movieData.Poster} alt={movieData.Title} />
+        {user ? (
+          <div>
+            <div id="logged-in">
+              <p>Welcome {user}!</p>
+              <Button type="button" onClick={() => handleLogout()} innerText="Logout" />
             </div>
-          )}
-          <Button
-            type="button"
-            onClick={() => handleAddToFavorites()}
-            innerText={"Add to Collection"}
-          />
-        </div>
+            <div id="movie-showcase">
+              <MovieSearch handleSelect={handleMovieSelect} />
+              {movieData && (
+                <div>
+                  <h2>{movieData.Title}</h2>
+                  <p>{movieData.Genre}</p>
+                  <p>{movieData.Year}</p>
+                  <p>{movieData.imdbRating}</p>
+                  <p>{movieData.Actors}</p>
+                  <p>{movieData.Plot}</p>
+                  <img src={movieData.Poster} alt={movieData.Title} />
+                </div>
+              )}
+              <Button
+                type="button"
+                onClick={() => handleAddToFavorites(user)}
+                innerText={"Add to Collection"}
+              />
+            </div>
+          </div>
+        ) : (
+          <div>
+            <Login onLogin={handleLogin} error={error} />
+          </div>
+        )}
         <Footer currentDate={currentDate} />
       </div>
     </div>

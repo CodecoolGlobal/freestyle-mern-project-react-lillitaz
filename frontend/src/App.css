@@ -153,6 +153,23 @@ input {
   font-size: larger;
 }
 
+#logged-in {
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(9px);
+  position: relative;
+  display: flex;
+  font-size: x-large;
+  font-weight: bolder;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 3rem;
+  margin-left: 65%;
+  margin-bottom:5%;
+  margin-top:5%;
+  border-radius: 2vh;
+  max-width: 20%;
+}
+
 footer {
   background-color: #faf4e2;
   height: 8vh;
@@ -167,6 +184,19 @@ footer {
   height: 8vh;
 }
 
+#error{
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(9px);
+  padding: 20px;
+  border-radius: 10px;
+  width: 30%;
+  text-align: left;
+  margin-left:35%;
+  margin-top:200%;
+  font-size: xx-large;
+  font-weight: bold;
+  color: #161414;
+}
 button {
   padding: 0.6%;
   margin: 2%;
@@ -237,4 +267,18 @@ button:hover {
     font-size: 4vw;
     padding-right: 0.5vw;
   }
+}
+
+#carousel-item {
+  scale: 0.15;
+}
+
+#carousel {
+  padding: 100px;
+  margin: auto;
+  margin-top: -55%;
+}
+
+.carousel-caption {
+  margin-bottom: 53%;
 }

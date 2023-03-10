@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Account from "./pages/Account";
 import AGB from "./pages/AGB";
 import FavoriteMovies from "./pages/FavoriteMovies";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
@@ -13,8 +14,8 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="account" element={<Account />} />
-          <Route path="AGB" element={<AGB></AGB>} />
           <Route path="favorite" element={<FavoriteMovies />} />
+          <Route path="AGB" element={<AGB />} />
         </Route>
       </Routes>
     </BrowserRouter>

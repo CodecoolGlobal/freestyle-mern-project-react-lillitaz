@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 
 function Home() {
   const [movieData, setMovieData] = useState({});
-  let currentDate = new Date().toDateString();
+  const currentDate = new Date().toDateString();
 
   const handleMovieSelect = async (movie) => {
     const response = await fetch(
@@ -20,14 +20,12 @@ function Home() {
     <div id="page-container">
       <div id="content-wrap">
         <div className="headline">
-          <container>
             <h1>Welcome to CrudeMovieDb</h1>
             <h2>
-              Watch at home or while you travel <br />
-              on tablet, phone or TV.
+               Browse through our library and collect movies at home or while traveling
+                on tablet, phone or TV.
             </h2>
             <p> Create an Account and collect your favorite Movies!</p>
-          </container>
         </div>
         <div>
           <CreateAccount />

@@ -11,7 +11,6 @@ export default function CreateAccount() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    window.location.href = "http://localhost:3000/account";
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       alert("Please enter a valid email address");
@@ -35,16 +34,17 @@ export default function CreateAccount() {
       return;
     }
 
-
     fetch("http://localhost:5000/api/create", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, userName, password }),
     })
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) =>
+        console.log(data))
       .catch((error) => console.error(error));
   }
+
   function handlePasswordShow() {
     setShowPassword(!showPassword);
   }

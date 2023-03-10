@@ -19,12 +19,22 @@ mongoose.connect(process.env.MONGODB_URI, {
   useUnifiedTopology: true,
 });
 
-app.get('/api/users', (req,res)=>{
-    
-  User.find({})
-  .then((users)=> res.json(users))
-  .catch((error) => console.error(error))
-})
+app.get('/api/users', (req, res) => {
+  const userName = req.query.userName;
+
+  User.findOne({ userName })
+    .then(user => {
+      if (!user) {
+        return res.status(404).json({ success: false, message: 'User not found' });
+      }
+
+      res.json(user.favorites);
+    })
+    .catch(error => {
+      console.error(error);
+      res.status(500).json({ success: false, message: 'Internal server error' });
+    });
+});
 
 app.post("/api/create", (req, res) => {
   const { email, userName, password } = req.body;
@@ -97,14 +107,21 @@ function requireLogin(req, res, next) {
   }
 }
 
-app.delete("/api/users/:userId/favorites/:favId", (req, res) => {
-  const userId = req.params.userId;
+app.delete("/api/users/:userName/favorites/:favId", (req, res) => {
+  const userName = req.params.userName;
   const favId = req.params.favId;
+
   if (!favId) {
     return res.status(400).send("Invalid favorite id");
   }
-  User.findByIdAndUpdate(userId, {$pull: {favorites: {_id: favId}}})
-    .then(() => {
+
+  User.findOneAndUpdate(
+    { userName: userName },
+    { $pull: { favorites: { _id: favId } } },
+    { new: true }
+  )
+    .then(updatedUser => {
+      console.log(updatedUser);
       res.status(200).send("Favorite movie deleted successfully");
     })
     .catch((error) => {
