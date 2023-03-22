@@ -19,10 +19,9 @@ mongoose.connect(process.env.MONGODB_URI, {
   useUnifiedTopology: true,
 });
 
-app.get('/api/users', (req, res) => {
-  const userName = req.query.userName;
-
-  User.findOne({ userName })
+app.get('/api/user/favorites/:id', (req, res) => {
+  const userId = req.params.id;
+  User.findById(userId)
     .then(user => {
       if (!user) {
         return res.status(404).json({ success: false, message: 'User not found' });
@@ -36,7 +35,8 @@ app.get('/api/users', (req, res) => {
     });
 });
 
-app.post("/api/create", (req, res) => {
+
+app.post("/api/create/user", (req, res) => {
   const { email, userName, password } = req.body;
   const user = new User({
     email,
@@ -59,7 +59,7 @@ app.post("/api/login", (req, res) => {
   User.findOne({ userName, password })
     .then((user) => {
       if (user) {
-        res.json({ success: true });
+        res.json({ success: true, message: user });
       } else {
         res
           .status(401)
@@ -74,38 +74,25 @@ app.post("/api/login", (req, res) => {
     });
 });
 
-app.post('/api/favorites', requireLogin, async (req, res) => {
+app.post('/api/favorites', async (req, res) => {
   try {
-    const { currentUser } = req.body;
+    const { user } = req.body;
     const { title, year, poster, imdbId } = req.body;
 
-    const user = await User.findOne({ userName: currentUser });
+    const currentUser = await User.findById(user);
 
-    if (!user) {
+    if (!currentUser) {
       res.status(401).json({ success: false, message: 'User not found' });
     } else {
-      user.favorites.push({ title, year, poster, imdbId });
-      await user.save();
-      res.status(200).json({ success: true, favorites: user.favorites });
+      currentUser.favorites.push({ title, year, poster, imdbId });
+      await currentUser.save();
+      res.status(200).json({ success: true, favorites: currentUser.favorites });
     }
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: 'Could not save' });
   }
 });
-
-function requireLogin(req, res, next) {
-  if (!req.body.currentUser) {
-    res
-      .status(401)
-      .json({
-        success: false,
-        message: "You must be logged in to perform this action",
-      });
-  } else {
-    next();
-  }
-}
 
 app.delete("/api/users/:userName/favorites/:favId", (req, res) => {
   const userName = req.params.userName;

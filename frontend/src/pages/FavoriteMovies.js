@@ -4,14 +4,12 @@ import Carousel from "react-bootstrap/Carousel";
 function FavoriteMovies() {
   const [movies, setMovies] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
-  const user = localStorage.getItem("user");
+  const user = localStorage.getItem("userId");
 
   useEffect(() => {
-    console.log(user);
-    fetch(`http://localhost:5000/api/users?userName=${user}`)
+    fetch(`http://localhost:5000/api/user/favorites/${user}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
         setMovies(data);
         setActiveIndex(0);
       })
@@ -19,8 +17,7 @@ function FavoriteMovies() {
   }, [user]);
 
   const handleRemove = (id) => {
-    const userName = user
-    fetch(`http://localhost:5000/api/users/${userName}/favorites/${id}`, {
+    fetch(`http://localhost:5000/api/users/${user}/favorites/${id}`, {
       method: "DELETE",
     })
       .then(() => {

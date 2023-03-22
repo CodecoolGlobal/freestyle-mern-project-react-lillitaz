@@ -1,13 +1,20 @@
-body {
-  font-family: "Quicksand", sans-serif;
-  background-image: url(./img/background1.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  color: #212121;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  background-color: rgb(231, 225, 225);
 }
 
-/*font:
-from https://fonts.google.com/specimen/Quicksand
-color scheme:
-https://colordesigner.io/#23254C-232323-E8ECF4-E1E2E5-E7CE8C
-*/
+#form {
+  top: 50%;
+  padding: 60px;
+  transform: translateY(-20%);
+}
+
+#registration-form {
+  position: fixed;
+  top: 50%;
+  padding: 60px;
+  transform: translateY(-60%);
+}
