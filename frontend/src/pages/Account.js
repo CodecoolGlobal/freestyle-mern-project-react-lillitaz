@@ -5,7 +5,7 @@ import Button from "../components/Button";
 import Login from "../components/Login";
 
 function Account() {
-  const [movieData, setMovieData] = useState({});
+  const [movieData, setMovieData] = useState();
   const user = localStorage.getItem("userId")
   
   const handleMovieSelect = async (movie) => {
