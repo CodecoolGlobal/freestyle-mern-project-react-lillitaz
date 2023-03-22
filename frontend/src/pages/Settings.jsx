@@ -1,50 +1,35 @@
-import { useEffect } from "react";
-import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import SettingsForm from "../components/SettingsForm";
+import { Navigate } from "react-router-dom";
 
-const updateUser = (user) => {
-
-  return fetch(`/api/users/${user._id}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(user),
-  }).then((res) => res.json());
-};
-
-const fetchUser = (id) => {
-  return fetch(`/api/users/${id}`).then((res) => res.json());
-};
-
-const UserUpdater = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-
+const Settings = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    fetchUser(id)
-      .then((user) => {
-        setUser(user);
-      });
-  }, [id]);
+    const userId = localStorage.getItem("userId");
 
-  const handleUpdateUser = (user) => {
-    updateUser(user)
-      .then(() => {
-        navigate("/account");
-      });
+    const fetchUser = async () => {
+        const response = await fetch(`http://localhost:5000/api/users/${userId}`);
+        console.log(response)
+      if (response.ok) {
+          const user = await response.json();
+
+        setUser(user);
+      }
+    };
+
+    if (userId) {
+      fetchUser();
+    }
+  }, []);
+
+  const onSave = () => {
+    Navigate("/account");
   };
 
-  return (
-    <SettingsForm
-      user={user}
-      onSave={handleUpdateUser}
-      onCancel={() => navigate("/account")}
-    />
-  );
+  return user ? (
+    <SettingsForm user={user} onCancel={() => Navigate("/account")} onSave={onSave} />
+  ) : null;
 };
 
-export default UserUpdater;
+export default Settings;

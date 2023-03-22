@@ -19,6 +19,22 @@ mongoose.connect(process.env.MONGODB_URI, {
   useUnifiedTopology: true,
 });
 
+app.get('/api/users/:userId', async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      res.status(404).send('User not found');
+    } else {
+      res.json(user);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server error');
+  }
+});
+
+
 app.get('/api/user/favorites/:id', (req, res) => {
   const userId = req.params.id;
   User.findById(userId)
@@ -115,4 +131,24 @@ app.delete("/api/users/:userName/favorites/:favId", (req, res) => {
       console.error(error);
       res.status(500).send(error);
     });
+});
+
+app.patch("/api/users/:userId", async (req, res) => {
+  const userId = req.params.userId;
+  const userData = req.body;
+
+  try {
+    const updatedUser = await User.findByIdAndUpdate(userId, userData, {
+      new: true,
+    });
+
+    if (!updatedUser) {
+      return res.status(404).send("User not found.");
+    }
+
+    res.send(updatedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error.");
+  }
 });
