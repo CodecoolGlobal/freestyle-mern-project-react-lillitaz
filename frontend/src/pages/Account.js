@@ -72,12 +72,14 @@ function Account() {
                   <p>{movieData.Plot}</p>
                   <img className="w-full" src={movieData.Poster} alt={movieData.Title} />
                 </div>
+                <div>
                 <Button
                   type="button"
                   onClick={() => handleAddToFavorites(user)}
                   innerText={"Add to Collection"}
                 />
-              </div>
+                </div>
+                </div>
             </div>
           ) : null}
         </div>
