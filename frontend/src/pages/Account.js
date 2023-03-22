@@ -17,7 +17,7 @@ function Account() {
   };
 
   const handleAddToFavorites = async () => {
-    const { Title: title, Year: year, Poster: poster, imdbID: imdbID } = movieData;
+    const { Title: title, Year: year, Poster: poster, imdbID } = movieData;
     if (!user || !movieData) {
       console.log("No user or movie data found");
       return;

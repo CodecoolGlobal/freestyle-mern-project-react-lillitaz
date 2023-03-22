@@ -1,10 +1,11 @@
+import { Button } from "bootstrap";
 import React, { useState } from "react";
 
 export default function Login({ onLogin, error }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("username") !== null && localStorage.getItem("password") !== null);
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("userId") !== null);
 
   const handleLogin = (userId) => {
     localStorage.setItem("userId", userId);
@@ -34,19 +35,10 @@ export default function Login({ onLogin, error }) {
   };
 };
 
-  const handleLogout = () => {
-    localStorage.removeItem("password");
-    localStorage.removeItem("username");
-    setIsLoggedIn(false);
-    alert("You are now logged out.");
-};
-
   return (
     <div>
       {isLoggedIn ? (
-        <div>
-          <button onClick={handleLogout} to="http://localhost:3000/" >Log out</button>
-        </div>
+     null
       ) : (                                  
         <div class="flex" id="form">
           <div class="flex bg-white">

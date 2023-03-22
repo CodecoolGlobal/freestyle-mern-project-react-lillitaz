@@ -4,7 +4,7 @@ const {Schema, model} = mongoose;
 const userData = new Schema({
     email: String,
     userName: String,
-    password: String,
+    hashedPassword: String,
     favorites: [{
         title: String,
         year: Number,
