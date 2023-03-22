@@ -88,12 +88,14 @@ const SettingsForm = ({ onSave, user, onCancel }) => {
                                     {user ? "Update Information" : "Create User"}
                                 </button>
                             </a>
-                            <button
-                                class="block w-full bg-blue-900 mt-5 py-2 rounded-1xl hover:bg-blue-800 hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2"
-                                type="button"
-                                onClick={onCancel}>
-                                Cancel
-                            </button>
+                            <a href="/account">
+                                <button
+                                    class="block w-full bg-blue-900 mt-5 py-2 rounded-1xl hover:bg-blue-800 hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2"
+                                    type="button"
+                                    onClick={onCancel}>
+                                    Cancel
+                                </button>
+                            </a>
                         </div>
                     </form>
                 </div>
