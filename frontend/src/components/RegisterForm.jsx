@@ -33,7 +33,6 @@ const RegisterForm = () => {
   };
 
   return (
-
     <div class="flex" id="registration-form">
       <div class="flex bg-white">
         <div class="w-full px- md:px-3 lg:px-0">

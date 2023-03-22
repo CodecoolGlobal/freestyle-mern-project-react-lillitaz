@@ -18,3 +18,11 @@
   padding: 60px;
   transform: translateY(-60%);
 }
+
+
+#settings-form {
+  position: fixed;
+  top: 60%;
+  padding: 9vw;
+  transform: translateY(-80%);
+}
