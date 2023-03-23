@@ -21,7 +21,7 @@ function Home() {
           <MovieSearch handleSelect={handleMovieSelect} />
           {movieData ? (
             <div className="holder grid sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2" style={{ margin: "1vw 3vw" }}>
-              <div className="each mb-10 m-2 shadow-lg border-gray-800 bg-gray-100 relative" style={{ width: "30vw" }}>
+              <div className="each mb-10 m-2 shadow-lg border-gray-800 bg-gray-100 relative" style={{ width: "80%" }}>
                 <div className="desc p-4 text-gray-800">
                   <p className="title font-bold block cursor-pointer hover:underline">{movieData.Title}</p>
                   <p>{movieData.Genre}</p>

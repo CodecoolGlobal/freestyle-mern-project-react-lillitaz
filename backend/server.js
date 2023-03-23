@@ -59,7 +59,6 @@ app.post("/api/create/user", (req, res) => {
   const user = new User({
     userName,
     email,
-    userName,
     hashedPassword: bcrypt.hashSync(password, bcrypt.genSaltSync()),
   });
 
