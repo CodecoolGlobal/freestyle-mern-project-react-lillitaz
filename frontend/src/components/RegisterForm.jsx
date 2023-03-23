@@ -36,9 +36,9 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="flex" id="registration-form">
+    <div className="flex" style={{ margin: "10vw 2vw" }} id="registration-form">
       <div className="flex bg-white">
-        <div className="w-full px- md:px-3 lg:px-0">
+        <div className="w-full px- md:px-3 lg:px-0" >
           <form onSubmit={handleSubmit}
             className="bg-white rounded-md shadow-2xl p-5">
             <h1 className="text-gray-800 font-bold text-5xl mb-1">Hello!</h1>
