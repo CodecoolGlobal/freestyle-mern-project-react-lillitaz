@@ -63,7 +63,6 @@ app.post("/api/create/user", (req, res) => {
   const user = new User({
     userName,
     email,
-    userName,
     hashedPassword: bcrypt.hashSync(password, bcrypt.genSaltSync()),
   });
 
@@ -128,16 +127,16 @@ app.post("/api/favorites", async (req, res) => {
   }
 });
 
-app.delete("/api/users/:userName/favorites/:favId", (req, res) => {
-  const userName = req.params.userName;
+app.delete("/api/users/:userId/favorites/:favId", (req, res) => {
+  const userId = req.params.userId;
   const favId = req.params.favId;
 
   if (!favId) {
     return res.status(400).send("Invalid favorite id");
   }
 
-  User.findOneAndUpdate(
-    { userName: userName },
+  User.findByIdAndUpdate(
+    userId,
     { $pull: { favorites: { _id: favId } } },
     { new: true }
   )

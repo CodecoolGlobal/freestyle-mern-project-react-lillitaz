@@ -3,11 +3,13 @@ import { useState } from "react";
 import MovieSearch from "../components/MovieSearch";
 import Button from "../components/Button";
 import Login from "../components/Login";
+import { useNavigate } from "react-router-dom";
 
 function Account() {
   const [movieData, setMovieData] = useState();
   const user = localStorage.getItem("userId")
-  
+  const navigate = useNavigate();
+
   const handleMovieSelect = async (movie) => {
     const response = await fetch(
       `http://www.omdbapi.com/?apikey=38ae7047&i=${movie.imdbID}`
@@ -31,6 +33,7 @@ function Account() {
       });
       if (response.ok) {
         console.log("Movie added to favorites");
+        navigate("/favorites");
       } else {
         console.error("Could not add movie to favorites");
       }
@@ -42,15 +45,20 @@ function Account() {
   return (
     <div id="page-container">
       <div id="content-wrap">
-        <div class="py-16">
-          <div class="container m-auto px-6 text-gray-600 md:px-12 xl:px-6">
-            <div class="space-y-6 md:space-y-0 md:flex md:gap-6 lg:items-center lg:gap-12">
-              <div class="md:5/12 lg:w-5/12">
-              </div>
-              <div class="md:7/12 lg:w-6/12">
-                <h2 class="text-2xl text-gray-900 font-bold md:text-4xl">This is your Dashboard</h2>
-                <p class="mt-6 text-gray-600"> Here you can add your favorite movies to your collection and share them.
+        <div className="py-16">
+          <div className="container m-auto px-6 text-gray-600 md:px-12 xl:px-6">
+            <div className="space-y-6 md:space-y-0 md:flex md:gap-6 lg:items-center lg:gap-12">
+              <div className="md:7/12 lg:w-6/12">
+                <h2 className="text-2xl text-gray-900 font-bold md:text-4xl">This is your Dashboard</h2>
+                <p className="mt-6 text-gray-600"> Here you can add your favorite movies to your collection and share them.
                 </p>
+              </div>
+              <div className="md:5/12 lg:w-5/12">
+                <img
+                  src="https://images.pexels.com/photos/33129/popcorn-movie-party-entertainment.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="cinema photography"
+                  width="450"
+                  height="">
+                </img>
               </div>
             </div>
           </div>
@@ -61,8 +69,8 @@ function Account() {
         <div>
           <MovieSearch handleSelect={handleMovieSelect} />
           {movieData ? (
-            <div className="holder max-w-screen-lg grid sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2" style={{ margin: "1vw 20%" }}>
-              <div className="each mb-10 m-2 shadow-lg border-gray-800 bg-gray-100 relative" style={{ width: "90%" }}>
+            <div className="holder max-w-screen-lg grid sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2" style={{ margin: "3vw 4vw" }}>
+              <div className="each mb-10 m-2 shadow-lg border-gray-800 bg-gray-100 relative" style={{ width: "95%" }}>
                 <div className="desc p-4 text-gray-800">
                   <p className="title font-bold block cursor-pointer hover:underline">{movieData.Title}</p>
                   <p>{movieData.Genre}</p>
@@ -73,13 +81,13 @@ function Account() {
                   <img className="w-full" src={movieData.Poster} alt={movieData.Title} />
                 </div>
                 <div>
-                <Button
-                  type="button"
-                  onClick={() => handleAddToFavorites(user)}
-                  innerText={"Add to Collection"}
-                />
+                  <Button
+                    type="button"
+                    onClick={() => handleAddToFavorites(user)}
+                    innerText={"Add to Collection"}
+                  />
                 </div>
-                </div>
+              </div>
             </div>
           ) : null}
         </div>

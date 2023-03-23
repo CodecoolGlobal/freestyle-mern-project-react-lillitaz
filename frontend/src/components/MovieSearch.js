@@ -31,10 +31,10 @@ function MovieSearch({ handleSelect }) {
 
   return (
     <form>
-      <div class="flex flex-col p-14 py-2 m-h-screen">
+      <div className="flex flex-col p-14 py-2 m-h-screen">
         <input
           onChange={handleSearchChange}
-          class="font-bold rounded-full w-full py-5 pl-8 text-white-600 bg-blue-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs"
+          className="font-bold rounded-full w-full py-5 pl-8 text-white-600 bg-blue-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs"
           type="text"
           value={searchQuery}
           placeholder="Enter Movie Title"
