@@ -1,22 +1,25 @@
-import useState from "react";
+import React, { useState } from "react";
 
 function MovieSearch({ handleSelect }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [movies, setMovies] = useState([]);
-  const [selectOption, setSelectOption] = useState("movies");
+  const [selectOption, setSelectOption] = useState("movie");
 
-  const handleChange = (value) => {
-    if (value === "movies") {
-      setSelectOption("movies");
+  const handleChange = (e) => {
+    if (e.target.value === "movie") {
+      setSelectOption("movie");
     } else {
       setSelectOption("series");
     }
+    console.log(e.target.value);
   };
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
     if (event.target.value) {
-      fetch(`http://www.omdbapi.com/?apikey=38ae7047&s=${event.target.value}`)
+      fetch(
+        `http://www.omdbapi.com/?apikey=38ae7047&s=${event.target.value}&Type=${selectOption}`
+      )
         .then((response) => response.json())
         .then((data) => {
           setMovies(data.Search || []);
@@ -40,8 +43,8 @@ function MovieSearch({ handleSelect }) {
           placeholder="Enter Movie Title"
         ></input>
         <div>
-          <select value={selectOption} onChange={handleChange()}>
-            <option value="movies">Series</option>
+          <select value={selectOption} onChange={handleChange}>
+            <option value="movie">Movie</option>
             <option value="series">Series</option>
           </select>
         </div>
