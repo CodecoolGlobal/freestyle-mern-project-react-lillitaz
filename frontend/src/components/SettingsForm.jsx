@@ -35,9 +35,9 @@ const SettingsForm = ({ onSave, user, onCancel }) => {
   };
 
     return (
-        <div className="flex" id="settings-form">
+        <div className="flex" style={{ margin: "5vw 1vw" }} id="settings-form">
             <div className="flex bg-white">
-                <div className="w-full px- md:px-50 lg:px-0">
+                <div className="w-full px- md:px-50 lg:px-0 " style={{ width: "70vw" }}>
                     <form className="bg-white rounded-md shadow-2xl p-5"
                         onSubmit={onSubmit}>
                         <div className="text-gray-800 text-3xl mb-1">
