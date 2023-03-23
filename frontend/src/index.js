@@ -1,19 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from "react";
+import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./index.css";
-import 'flowbite/dist/flowbite.css';
-import 'flowbite/dist/flowbite.js';
+import "flowbite/dist/flowbite.css";
+import "flowbite/dist/flowbite.js";
 
-import Layout from './pages/Layout';
-import Home from './pages/Home';
-import ErrorPage from './pages/ErrorPage';
-import FavoriteMovies from './pages/FavoriteMovies';
-import AGB from './pages/AGB';
-import Account from './pages/Account';
-import RegistrationPage from './pages/RegistrationPage';
-import UserUpdater from './pages/Settings';
+import Layout from "./pages/Layout";
+import Home from "./pages/Home";
+import ErrorPage from "./pages/ErrorPage";
+import FavoriteMovies from "./pages/FavoriteMovies";
+import AGB from "./pages/AGB";
+import Account from "./pages/Account";
+import RegistrationPage from "./pages/RegistrationPage";
+import UserUpdater from "./pages/Settings";
 
 const router = createBrowserRouter([
   {
@@ -44,12 +44,12 @@ const router = createBrowserRouter([
       {
         path: "/AGB",
         element: <AGB />,
-      }
+      },
     ],
   },
 ]);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
