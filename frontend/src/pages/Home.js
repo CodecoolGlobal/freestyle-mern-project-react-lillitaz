@@ -1,11 +1,9 @@
 import { useState } from "react";
 import MovieSearch from "../components/MovieSearch";
 import Login from "../components/Login";
-//import Footer from "../components/Footer";
 
 function Home() {
-  const [movieData, setMovieData] = useState({});
-//  const currentDate = new Date().toDateString();
+  const [movieData, setMovieData] = useState();
 
   const handleMovieSelect = async (movie) => {
     const response = await fetch(

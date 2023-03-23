@@ -5,7 +5,7 @@ import Button from "../components/Button";
 import Login from "../components/Login";
 
 function Account() {
-  const [movieData, setMovieData] = useState({});
+  const [movieData, setMovieData] = useState();
   const user = localStorage.getItem("userId")
   
   const handleMovieSelect = async (movie) => {
@@ -17,7 +17,7 @@ function Account() {
   };
 
   const handleAddToFavorites = async () => {
-    const { Title: title, Year: year, Poster: poster, imdbID: imdbID } = movieData;
+    const { Title: title, Year: year, Poster: poster, imdbID } = movieData;
     if (!user || !movieData) {
       console.log("No user or movie data found");
       return;
@@ -72,12 +72,14 @@ function Account() {
                   <p>{movieData.Plot}</p>
                   <img className="w-full" src={movieData.Poster} alt={movieData.Title} />
                 </div>
+                <div>
                 <Button
                   type="button"
                   onClick={() => handleAddToFavorites(user)}
                   innerText={"Add to Collection"}
                 />
-              </div>
+                </div>
+                </div>
             </div>
           ) : null}
         </div>

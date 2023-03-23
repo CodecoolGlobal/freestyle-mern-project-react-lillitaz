@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
 const RegisterForm = () => {
-  const [username, setUsername] = useState("");
+  const [userName, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const newUser = { username, email, password };
+    const newUser = { userName, email, password };
 
     try {
       const response = await fetch("http://localhost:5000/api/create/user", {
@@ -33,7 +33,6 @@ const RegisterForm = () => {
   };
 
   return (
-
     <div class="flex" id="registration-form">
       <div class="flex bg-white">
         <div class="w-full px- md:px-3 lg:px-0">
@@ -47,7 +46,7 @@ const RegisterForm = () => {
               </svg>
               <input
                 type="text"
-                value={username}
+                value={userName}
                 onChange={(event) => setUsername(event.target.value)}
                 required
                 class=" pl-2 w-full outline-none border-none" placeholder="Username" />

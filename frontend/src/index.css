@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  background-color: rgb(231, 225, 225);
+  background-color: rgb(240, 235, 230);
 }
 
 #form {
@@ -17,4 +17,12 @@
   top: 50%;
   padding: 60px;
   transform: translateY(-60%);
+}
+
+
+#settings-form {
+  position: fixed;
+  top: 60%;
+  padding: 9vw;
+  transform: translateY(-80%);
 }

@@ -3,6 +3,7 @@ import express from "express";
 import User from "./model/User.js";
 import dotenv from "dotenv";
 import cors from "cors";
+import bcrypt from "bcryptjs"
 
 dotenv.config();
 
@@ -54,11 +55,14 @@ app.get('/api/user/favorites/:id', (req, res) => {
 
 app.post("/api/create/user", (req, res) => {
   const { email, userName, password } = req.body;
+
   const user = new User({
+    userName,
     email,
     userName,
-    password,
+    hashedPassword: bcrypt.hashSync(password, bcrypt.genSaltSync()),
   });
+
   console.log(user);
   user
     .save()
@@ -72,23 +76,25 @@ app.post("/api/create/user", (req, res) => {
 app.post("/api/login", (req, res) => {
   const { userName, password } = req.body;
 
-  User.findOne({ userName, password })
+  User.findOne({ userName })
     .then((user) => {
-      if (user) {
-        res.json({ success: true, message: user });
+      if (!user) {
+        res.status(401).json({ success: false, message: "Invalid username or password" });
       } else {
-        res
-          .status(401)
-          .json({ success: false, message: "Invalid username or password" });
+        const doesPasswordMatch = bcrypt.compareSync(password, user.hashedPassword);
+        if (doesPasswordMatch) {
+          res.json({ success: true, message: user });
+        } else {
+          res.status(401).json({ success: false, message: "Invalid username or password" });
+        }
       }
     })
     .catch((err) => {
       console.error(err);
-      res
-        .status(500)
-        .json({ success: false, message: "Internal server error" });
+      res.status(500).json({ success: false, message: "Internal server error" });
     });
 });
+
 
 app.post('/api/favorites', async (req, res) => {
   try {

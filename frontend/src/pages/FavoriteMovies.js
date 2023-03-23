@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Carousel from "react-bootstrap/Carousel";
+import Button from "../components/Button";
 
 function FavoriteMovies() {
   const [movies, setMovies] = useState([]);
-  const [activeIndex, setActiveIndex] = useState(0);
   const user = localStorage.getItem("userId");
 
   useEffect(() => {
@@ -11,7 +10,6 @@ function FavoriteMovies() {
       .then((response) => response.json())
       .then((data) => {
         setMovies(data);
-        setActiveIndex(0);
       })
       .catch((error) => console.error(error));
   }, [user]);
@@ -25,44 +23,31 @@ function FavoriteMovies() {
           const updatedFavorites = prevState.filter((fav) => fav._id !== id);
           return updatedFavorites;
         });
-        setActiveIndex(0);
       })
       .catch((error) => console.error(error));
   };
 
-  const handleSelect = (selectedIndex) => {
-    setActiveIndex(selectedIndex);
-  };
-
   return (
-    <div>
-      <div id="carousel">
-        {movies.length > 0 ? (
-          <Carousel activeIndex={activeIndex} onSelect={handleSelect}>
-            {movies.map((fav) => (
-              <Carousel.Item key={fav._id}>
-                <img className="d-block w-100" id="carousel-item" src={fav.poster} alt="Movie Poster" />
-                <Carousel.Caption>
-                  <h3>{fav.title}</h3>
-                  <p>{fav.year}</p>
-                  <button
-                    id="remove-button"
-                    type="button"
-                    onClick={() => handleRemove(fav._id)}
-                  >
-                    Remove
-                  </button>
-                </Carousel.Caption>
-              </Carousel.Item>
-            ))}
-          </Carousel>
-        ) : (
-          <p id="error">No favorite movies found.</p>
-        )}
-      </div>
+    <div className="holder max-w-screen-lg grid sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-3" style={{ margin: "5vw 5%" }}>
+      {movies.length > 0 ? (
+        movies.map((fav) => (
+          <div className="each mb-10 m-2 shadow-lg border-gray-800 bg-gray-100 relative" key={fav._id} style={{ width: "90%" }}>
+            <img className="d-block w-100" id="carousel-item" src={fav.poster} alt="Movie Poster" />
+            <h3>{fav.title}</h3>
+            <p>{fav.year}</p>
+            <Button
+              type="button"
+              onClick={() => handleRemove(fav._id)}
+              innerText="Remove"
+            >
+            </Button>
+          </div>
+        ))
+      ) : (
+        <p id="error">No favorite movies found.</p>
+      )}
     </div>
   );
-  
 }
 
 export default FavoriteMovies;

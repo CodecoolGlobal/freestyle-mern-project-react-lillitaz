@@ -14,6 +14,15 @@ import AGB from "./pages/AGB";
 import Account from "./pages/Account";
 import RegistrationPage from "./pages/RegistrationPage";
 import UserUpdater from "./pages/Settings";
+import Layout from "./pages/Layout";
+import Home from "./pages/Home";
+import ErrorPage from "./pages/ErrorPage";
+import FavoriteMovies from "./pages/FavoriteMovies";
+import AGB from "./pages/AGB";
+import Account from "./pages/Account";
+import RegistrationPage from "./pages/RegistrationPage";
+import UserUpdater from "./pages/Settings";
+import Signout from "./pages/Signout";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/favorites",
         element: <FavoriteMovies />,
+      },
+      {
+        path: "/signout",
+        element: <Signout />,
       },
       {
         path: "/register",
