@@ -48,12 +48,17 @@ function Account() {
         <div className="py-16">
           <div className="container m-auto px-6 text-gray-600 md:px-12 xl:px-6">
             <div className="space-y-6 md:space-y-0 md:flex md:gap-6 lg:items-center lg:gap-12">
-              <div className="md:5/12 lg:w-5/12">
-              </div>
               <div className="md:7/12 lg:w-6/12">
                 <h2 className="text-2xl text-gray-900 font-bold md:text-4xl">This is your Dashboard</h2>
                 <p className="mt-6 text-gray-600"> Here you can add your favorite movies to your collection and share them.
                 </p>
+              </div>
+              <div className="md:5/12 lg:w-5/12">
+                <img
+                  src="https://images.pexels.com/photos/33129/popcorn-movie-party-entertainment.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="cinema photography"
+                  width="450"
+                  height="">
+                </img>
               </div>
             </div>
           </div>
@@ -65,7 +70,7 @@ function Account() {
           <MovieSearch handleSelect={handleMovieSelect} />
           {movieData ? (
             <div className="holder max-w-screen-lg grid sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2" style={{ margin: "3vw 4vw" }}>
-              <div className="each mb-10 m-2 shadow-lg border-gray-800 bg-gray-100 relative" style={{ width: "30vw" }}>
+              <div className="each mb-10 m-2 shadow-lg border-gray-800 bg-gray-100 relative" style={{ width: "95%" }}>
                 <div className="desc p-4 text-gray-800">
                   <p className="title font-bold block cursor-pointer hover:underline">{movieData.Title}</p>
                   <p>{movieData.Genre}</p>
@@ -76,13 +81,13 @@ function Account() {
                   <img className="w-full" src={movieData.Poster} alt={movieData.Title} />
                 </div>
                 <div>
-                <Button
-                  type="button"
-                  onClick={() => handleAddToFavorites(user)}
-                  innerText={"Add to Collection"}
-                />
+                  <Button
+                    type="button"
+                    onClick={() => handleAddToFavorites(user)}
+                    innerText={"Add to Collection"}
+                  />
                 </div>
-                </div>
+              </div>
             </div>
           ) : null}
         </div>

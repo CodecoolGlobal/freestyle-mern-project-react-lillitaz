@@ -40,7 +40,7 @@ export default function Login({ onLogin, error }) {
      null
       ) : (                                  
         <div className="flex" id="form">
-          <div className="flex bg-white">
+          <div className="flex bg-white" style={{ margin: "10vw 5vw" }}>
             <div className="items-center justify-between w-full lg:w justify-center items-center lg:px-0">
              
                 <form onSubmit={handleSubmit}
