@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
   const [userName, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,6 +26,7 @@ const RegisterForm = () => {
         setUsername("");
         setEmail("");
         setPassword("");
+        navigate("/account")
       } else {
         alert("Registration failed.");
       }
