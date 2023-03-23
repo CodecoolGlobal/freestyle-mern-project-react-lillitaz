@@ -55,8 +55,6 @@ app.get("/api/user/favorites/:id", (req, res) => {
     });
 });
 
-app.get("/movienightideas", (req, res) => {});
-
 app.post("/api/create/user", (req, res) => {
   const { email, userName, password } = req.body;
 
