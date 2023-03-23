@@ -42,14 +42,14 @@ function Account() {
   return (
     <div id="page-container">
       <div id="content-wrap">
-        <div class="py-16">
-          <div class="container m-auto px-6 text-gray-600 md:px-12 xl:px-6">
-            <div class="space-y-6 md:space-y-0 md:flex md:gap-6 lg:items-center lg:gap-12">
-              <div class="md:5/12 lg:w-5/12">
+        <div className="py-16">
+          <div className="container m-auto px-6 text-gray-600 md:px-12 xl:px-6">
+            <div className="space-y-6 md:space-y-0 md:flex md:gap-6 lg:items-center lg:gap-12">
+              <div className="md:5/12 lg:w-5/12">
               </div>
-              <div class="md:7/12 lg:w-6/12">
-                <h2 class="text-2xl text-gray-900 font-bold md:text-4xl">This is your Dashboard</h2>
-                <p class="mt-6 text-gray-600"> Here you can add your favorite movies to your collection and share them.
+              <div className="md:7/12 lg:w-6/12">
+                <h2 className="text-2xl text-gray-900 font-bold md:text-4xl">This is your Dashboard</h2>
+                <p className="mt-6 text-gray-600"> Here you can add your favorite movies to your collection and share them.
                 </p>
               </div>
             </div>
