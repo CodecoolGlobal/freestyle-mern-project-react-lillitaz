@@ -14,17 +14,18 @@ function FavoriteMovies() {
       .catch((error) => console.error(error));
   }, [user]);
 
-  const handleRemove = (id) => {
-    fetch(`http://localhost:5000/api/users/${user}/favorites/${id}`, {
-      method: "DELETE",
-    })
-      .then(() => {
-        setMovies((prevState) => {
-          const updatedFavorites = prevState.filter((fav) => fav._id !== id);
-          return updatedFavorites;
-        });
-      })
-      .catch((error) => console.error(error));
+  const handleRemove = async (id) => {
+    try {
+      await fetch(`http://localhost:5000/api/users/${user}/favorites/${id}`, {
+        method: "DELETE",
+      });
+      setMovies((prevState) => {
+        const updatedFavorites = prevState.filter((fav) => fav._id !== id);
+        return updatedFavorites;
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -32,7 +33,7 @@ function FavoriteMovies() {
       {movies.length > 0 ? (
         movies.map((fav) => (
           <div className="each mb-10 m-2 shadow-lg border-gray-800 bg-gray-100 relative" key={fav._id} style={{ width: "90%" }}>
-            <img className="d-block w-100" id="carousel-item" src={fav.poster} alt="Movie Poster" />
+            <img className="d-block w-100" src={fav.poster} alt="Movie Poster" />
             <h3>{fav.title}</h3>
             <p>{fav.year}</p>
             <Button
@@ -44,7 +45,11 @@ function FavoriteMovies() {
           </div>
         ))
       ) : (
-        <p id="error">No favorite movies found.</p>
+        <div className="holder max-w-screen-lg grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1" style={{ margin: "5vw 1vw" }}>
+            <div className="mb-10 m-2 text-5xl shadow-lg border-gray-800 bg-gray-100 relative" style={{ width: "85vw" }}>
+              <p>No favorite movies found.</p>
+            </div>
+          </div>
       )}
     </div>
   );

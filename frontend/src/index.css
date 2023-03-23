@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  background-color: rgb(240, 235, 230);
+  background-color: rgba(212, 220, 247, 0.726);
 }
 
 #form {
