@@ -3,7 +3,7 @@ import express from "express";
 import User from "./model/User.js";
 import dotenv from "dotenv";
 import cors from "cors";
-import bcrypt from "bcryptjs"
+import bcrypt from "bcryptjs";
 
 dotenv.config();
 
@@ -20,38 +20,42 @@ mongoose.connect(process.env.MONGODB_URI, {
   useUnifiedTopology: true,
 });
 
-app.get('/api/users/:userId', async (req, res) => {
+app.get("/api/users/:userId", async (req, res) => {
   const { userId } = req.params;
   try {
     const user = await User.findById(userId);
     if (!user) {
-      res.status(404).send('User not found');
+      res.status(404).send("User not found");
     } else {
       res.json(user);
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send('Server error');
+    res.status(500).send("Server error");
   }
 });
 
-
-app.get('/api/user/favorites/:id', (req, res) => {
+app.get("/api/user/favorites/:id", (req, res) => {
   const userId = req.params.id;
   User.findById(userId)
-    .then(user => {
+    .then((user) => {
       if (!user) {
-        return res.status(404).json({ success: false, message: 'User not found' });
+        return res
+          .status(404)
+          .json({ success: false, message: "User not found" });
       }
 
       res.json(user.favorites);
     })
-    .catch(error => {
+    .catch((error) => {
       console.error(error);
-      res.status(500).json({ success: false, message: 'Internal server error' });
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
     });
 });
 
+app.get("/movienightideas", (req, res) => {});
 
 app.post("/api/create/user", (req, res) => {
   const { email, userName, password } = req.body;
@@ -79,24 +83,32 @@ app.post("/api/login", (req, res) => {
   User.findOne({ userName })
     .then((user) => {
       if (!user) {
-        res.status(401).json({ success: false, message: "Invalid username or password" });
+        res
+          .status(401)
+          .json({ success: false, message: "Invalid username or password" });
       } else {
-        const doesPasswordMatch = bcrypt.compareSync(password, user.hashedPassword);
+        const doesPasswordMatch = bcrypt.compareSync(
+          password,
+          user.hashedPassword
+        );
         if (doesPasswordMatch) {
           res.json({ success: true, message: user });
         } else {
-          res.status(401).json({ success: false, message: "Invalid username or password" });
+          res
+            .status(401)
+            .json({ success: false, message: "Invalid username or password" });
         }
       }
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).json({ success: false, message: "Internal server error" });
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
     });
 });
 
-
-app.post('/api/favorites', async (req, res) => {
+app.post("/api/favorites", async (req, res) => {
   try {
     const { user } = req.body;
     const { title, year, poster, imdbId } = req.body;
@@ -104,7 +116,7 @@ app.post('/api/favorites', async (req, res) => {
     const currentUser = await User.findById(user);
 
     if (!currentUser) {
-      res.status(401).json({ success: false, message: 'User not found' });
+      res.status(401).json({ success: false, message: "User not found" });
     } else {
       currentUser.favorites.push({ title, year, poster, imdbId });
       await currentUser.save();
@@ -112,7 +124,7 @@ app.post('/api/favorites', async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: 'Could not save' });
+    res.status(500).json({ success: false, message: "Could not save" });
   }
 });
 
@@ -129,7 +141,7 @@ app.delete("/api/users/:userName/favorites/:favId", (req, res) => {
     { $pull: { favorites: { _id: favId } } },
     { new: true }
   )
-    .then(updatedUser => {
+    .then((updatedUser) => {
       console.log(updatedUser);
       res.status(200).send("Favorite movie deleted successfully");
     })

@@ -1,22 +1,15 @@
-import useState from "react";
+import React, { useState } from "react";
 
-function MovieSearch({ handleSelect }) {
+function GenSearch({ handleSelect }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [movies, setMovies] = useState([]);
-  const [selectOption, setSelectOption] = useState("movies");
-
-  const handleChange = (value) => {
-    if (value === "movies") {
-      setSelectOption("movies");
-    } else {
-      setSelectOption("series");
-    }
-  };
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
     if (event.target.value) {
-      fetch(`http://www.omdbapi.com/?apikey=38ae7047&s=${event.target.value}`)
+      fetch(
+        `http://www.omdbapi.com/?apikey=38ae7047&s=${event.target.value}&type=series`
+      )
         .then((response) => response.json())
         .then((data) => {
           setMovies(data.Search || []);
@@ -39,12 +32,7 @@ function MovieSearch({ handleSelect }) {
           value={searchQuery}
           placeholder="Enter Movie Title"
         ></input>
-        <div>
-          <select value={selectOption} onChange={handleChange()}>
-            <option value="movies">Series</option>
-            <option value="series">Series</option>
-          </select>
-        </div>
+
         <ul className={movies.length > 0 ? "autocomplete-items" : ""}>
           {movies.map((movie) => (
             <li
@@ -64,4 +52,4 @@ function MovieSearch({ handleSelect }) {
   );
 }
 
-export default MovieSearch;
+export default GenSearch;
